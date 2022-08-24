@@ -1,0 +1,25 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml:2:1-4:12
+INJECTED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml:2:1-4:12
+INJECTED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml:2:1-4:12
+	package
+		ADDED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml:3:7-27
+		INJECTED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml
+		INJECTED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml
+	xmlns:android
+		ADDED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml:2:11-69
+uses-sdk
+INJECTED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml
+INJECTED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml
+INJECTED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml
+INJECTED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml
+		ADDED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml
+		INJECTED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml
+		ADDED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml
+		INJECTED from /media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/java/AndroidManifest.xml

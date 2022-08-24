@@ -1,0 +1,1 @@
+/media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/build/intermediates/cxx/Debug/15254d3w/obj/x86_64
