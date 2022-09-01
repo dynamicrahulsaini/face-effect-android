@@ -1,0 +1,1 @@
+/media/rahul/new_volume/AndroidStudioProjects/MyApplication/opencv/build/intermediates/cxx/RelWithDebInfo/4f4w1i4h/obj/x86
