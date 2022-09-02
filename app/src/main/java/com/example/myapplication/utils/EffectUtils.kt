@@ -9,15 +9,17 @@ import org.opencv.imgproc.Imgproc
 import kotlin.math.atan
 import kotlin.math.abs
 
-
+// TODO: transparency issue in the effect
 object EffectUtils {
     private val _logTag: String = EffectUtils.javaClass.name
     var neutral_angle = Double.MIN_VALUE
 
-    fun removeWhitespace(image: Mat, blend: Mat, x: Int, y: Int, threshold: Int) {
+    fun removeWhitespace(image: Mat, blend: Mat, x: Int, y: Int, threshold: Int = 255) {
+        Log.d(_logTag, "${blend.rows()}, ${blend.cols()}, ${blend[0, 0].size} -^")
         for (i in 0..blend.rows()) {
             for (j in 0..blend.cols()) {
                 for (k in 0..3) {
+                    Log.d(_logTag, "null error: ${blend[i, j][k]}, $i, $j, $k")
                     if (blend[i, j][k] > threshold) {
                         blend[i, j][k] = image[i + x, j + y][k]
                     }
@@ -26,7 +28,7 @@ object EffectUtils {
         }
     }
 
-    fun getAngle(cords: ArrayList<Point>): Double {
+    private fun getAngle(cords: ArrayList<Point>): Double {
         val height = abs((cords[1].y - cords[2].y))
         val base  = abs((cords[1].x - cords[2].x))
 
@@ -41,7 +43,7 @@ object EffectUtils {
     fun getRectangleCords(cords: ArrayList<Point>, angle: Double): ArrayList<Point> {
         if (angle - neutral_angle == 0.0)
             return arrayListOf(cords[0], cords[3])
-        return if (angle - neutral_angle < 0)
+        return if (angle - neutral_angle > 0)
             arrayListOf(Point(cords[0].x, cords[2].y), Point(cords[3].x, cords[1].y))
         else
             arrayListOf(Point(cords[1].x, cords[0].y), Point(cords[2].x, cords[3].y))
@@ -76,19 +78,19 @@ object EffectUtils {
 
 //        Log.d(_logTag, "${ rotationMat[0, 2][0] } : ${ rotationMat[1, 2][0] }")
 
-        val dstMat: Mat = Mat.zeros(newHeight, newWidth, CvType.CV_32S)
+        val dstMat: Mat = Mat.zeros(newHeight, newWidth, CvType.CV_16SC4)
+        dstMat.setTo(Scalar(255.0, 255.0, 255.0, 0.0))
+//        Log.d(_logTag, "effect values - ${dstMat[0, 0][0]}, ${dstMat[0, 0][1]}, ${dstMat[0, 0][2]}, ${dstMat[0, 0][3]}, ${ image[0, 0].size }, ${ rotationMat[0, 0].size }")
         Imgproc.warpAffine(
             image,
             dstMat,
             rotationMat,
             Size(newWidth.toDouble(), newHeight.toDouble()),
-            Imgproc.INTER_LINEAR,
-            Core.BORDER_TRANSPARENT
+            Imgproc.INTER_LINEAR
         )
         return dstMat
     }
 
-    // TODO: figure out how we will use the effect
     fun addEffect(context: Context, image: Mat, landmarkCords: ArrayList<Point>): Mat {
         val angle = getAngle(landmarkCords)
         val rectangleCords = getRectangleCords(landmarkCords, angle)
@@ -108,14 +110,12 @@ object EffectUtils {
             rectangleCords[1].x.toInt()
         )
 
-//        Log.d(_logTag, "${rotatedEffect.rows()}, ${rotatedEffect.cols()}")
         val w = roi.cols()
         val h = roi.rows()
         Imgproc.resize(rotatedEffect, rotatedEffect, Size(w.toDouble(), h.toDouble()))
-//        Log.d(_logTag, "->${rotatedEffect.rows()}, ${rotatedEffect.cols()}, ${rotatedEffect[0, 0].size}")
-//        Log.d(_logTag, "->${roi.rows()}, ${roi.cols()}, ${roi[0, 0].size}")
         val dst = Mat.zeros(roi.rows(), roi.cols(), roi.type())
         Core.addWeighted(roi, 0.0, rotatedEffect, 1.0, 0.0, dst)
+//        removeWhitespace(image, dst, rectangleCords[0].x.toInt(), rectangleCords[0].y.toInt())
         dst.copyTo(roi)
         return image
     }
