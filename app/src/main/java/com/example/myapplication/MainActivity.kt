@@ -78,18 +78,18 @@ class MainActivity : AppCompatActivity() {
             // Image im = ir.acquireLatestImage();
 
 //            Log.d(_logTag, "timestamp: ${ System.currentTimeMillis() }")
-            if (frameTime == Long.MIN_VALUE) {
-                frameTime = System.currentTimeMillis()
-                height = ir.height
-                width = ir.width
-                Log.d("$_logTag ->", "$height, $width")
-            }
-            // uncomment this to get fps based on frame time
-//            else {
-//                val currentTime = System.currentTimeMillis()
-//                Log.d(_logTag, "${ 1000.0/(currentTime - frameTime)}")
-//                frameTime = currentTime
+//            if (frameTime == Long.MIN_VALUE) {
+//                frameTime = System.currentTimeMillis()
+//                height = ir.height
+//                width = ir.width
+//                Log.d("$_logTag ->", "$height, $width")
 //            }
+//            // uncomment this to get fps based on frame time
+////            else {
+////                val currentTime = System.currentTimeMillis()
+////                Log.d(_logTag, "${ 1000.0/(currentTime - frameTime)}")
+////                frameTime = currentTime
+////            }
 
 
             val image = ir.acquireNextImage()
@@ -133,7 +133,7 @@ class MainActivity : AppCompatActivity() {
     private var boolean: Boolean = true
 
     private var faceMeshResultListener: ResultListener<FaceMeshResult> = ResultListener {
-        Log.d(_logTag, "Face count: ${ it.multiFaceLandmarks().size }")
+//        Log.d(_logTag, "Face count: ${ it.multiFaceLandmarks().size }")
         var image = images[it.timestamp()]
         if (it.multiFaceLandmarks().size > 0) {
             val cords = ArrayList<Point>(1564)
@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
 //                Imgproc.drawMarker(image, cords.last(), Scalar(255.0, 255.0, 255.0, 255.0), Imgproc.MARKER_TILTED_CROSS, 15, 2)
 //                Log.d(_logTag, "${ cords.last().x }, ${ cords.last().y }")
             }
-            Log.d(_logTag, "angle: ${ image!![0, 0].size }")
+//            Log.d(_logTag, "angle: ${ image!![0, 0].size }")
             image = EffectUtils.addEffect(this@MainActivity, image!!, cords)
         }
         val bitmap = Bitmap.createBitmap(
@@ -152,11 +152,11 @@ class MainActivity : AppCompatActivity() {
             image.rows(),
             Bitmap.Config.ARGB_8888
         )
-        Log.d(_logTag, "${ image.cols() }, ${ image.rows() }")
+//        Log.d(_logTag, "${ image.cols() }, ${ image.rows() }")
         Utils.matToBitmap(image, bitmap)
 
         runOnUiThread {
-            Log.d(_logTag, "setting image")
+//            Log.d(_logTag, "setting image")
             imageView!!.setImageBitmap(bitmap)
         }
     }
